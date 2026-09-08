@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form'
 import { useSearchParams } from 'react-router-dom'
 import { Button } from '../components/elements/Button'
 import { Seo } from '../components/modules/Seo'
+import { ContactPortal } from '../components/modules/PageSculptures'
 import { agency } from '../config/agency'
 import { goals, services } from '../data/content'
 import { DemoModeError, submitEnquiry } from '../services/enquiry'
@@ -36,7 +37,7 @@ export function ContactPage() {
   const errorKeys = Object.keys(errors)
   return <>
     <Seo title="Contact — Growth Studio" description="Tell Growth Studio about your website, brand, or marketing project." path="/contact" />
-    <section className="contact-page surface-dark"><div className="container contact-layout"><aside className="contact-intro"><p className="eyebrow">Start a project</p><h1>Tell us what you<br /><em>want to build.</em></h1><p className="lede">A few useful details will help us understand the opportunity and suggest a sensible next step.</p><div className="next-steps"><h2>What happens next</h2><ol><li><span>01</span>We review your goals, context, and requested services.</li><li><span>02</span>If the fit looks useful, we agree on a discovery conversation.</li><li><span>03</span>You receive a tailored scope and proposal—never a generic package.</li></ol></div>{contactOptions.length > 0 && <div className="direct-contact"><p className="mini-label">Prefer another route?</p>{contactOptions.map((item) => <a key={item.href} href={item.href}><span>{item.label}</span>{item.value}</a>)}</div>}</aside>
+    <section className="contact-page surface-dark"><div className="container contact-layout"><aside className="contact-intro"><p className="eyebrow">Start a project</p><h1>Tell us what you<br /><em>want to build.</em></h1><p className="lede">A few useful details will help us understand the opportunity and suggest a sensible next step.</p><ContactPortal /><div className="next-steps"><h2>What happens next</h2><ol><li><span>01</span>We review your goals, context, and requested services.</li><li><span>02</span>If the fit looks useful, we agree on a discovery conversation.</li><li><span>03</span>You receive a tailored scope and proposal—never a generic package.</li></ol></div>{contactOptions.length > 0 && <div className="direct-contact"><p className="mini-label">Prefer another route?</p>{contactOptions.map((item) => <a key={item.href} href={item.href}><span>{item.label}</span>{item.value}</a>)}</div>}</aside>
       <div className="enquiry-card"><div className="form-progress" aria-label={`Step ${step} of 2`}><div><span>0{step}</span> / 02</div><div className="form-progress__track"><i style={{ width: `${step * 50}%` }} /></div><p>{step === 1 ? 'Project details' : 'Your details'}</p></div>
         {errorKeys.length > 0 && <div className="error-summary" ref={summaryRef} tabIndex="-1" role="alert"><AlertCircle /><div><strong>Please check the highlighted fields.</strong><ul>{errorKeys.map((key) => <li key={key}>{errors[key]?.message}</li>)}</ul></div></div>}
         <form onSubmit={handleSubmit(onSubmit)} noValidate>

@@ -9,6 +9,7 @@ import { Reveal } from '../components/modules/Reveal'
 import { Accordion } from '../components/modules/Accordion'
 import { CTASection } from '../components/modules/CTASection'
 import { Seo } from '../components/modules/Seo'
+import { KineticSculpture } from '../components/modules/KineticSculpture'
 import { faqs, projects, services } from '../data/content'
 import { useMediaQuery } from '../hooks/useMediaQuery'
 
@@ -23,10 +24,11 @@ function HeroArtwork() {
   }
   return <div className="hero-art" onPointerMove={move} onPointerLeave={() => setOffset({ x: 0, y: 0 })}>
     <div className="hero-art__frame" aria-hidden="true"></div>
-    <motion.div className="hero-art__main" animate={offset} transition={{ type: 'spring', stiffness: 140, damping: 20 }}><img src={projects[0].image} alt="Morrow ecommerce concept on a desktop screen" width="1536" height="1024" fetchPriority="high" /></motion.div>
-    <motion.div className="hero-art__tile hero-art__tile--brand" animate={{ x: offset.x * -1.4, y: offset.y * -1.4 }}><img src={projects[1].image} alt="Detail of Kindred brand identity concept" width="1536" height="1024" /></motion.div>
-    <motion.div className="hero-art__tile hero-art__tile--campaign" animate={{ x: offset.x * 1.7, y: offset.y * 1.7 }}><img src={projects[2].image} alt="Detail of Frequency campaign concept" width="1536" height="1024" /></motion.div>
-    <span className="hero-art__label">Strategy / Design / Growth</span><span className="hero-art__arrow" aria-hidden="true">↗</span>
+    <motion.div className="hero-art__main" animate={{ x: offset.x, y: offset.y, rotateX: offset.y * -0.32, rotateY: offset.x * 0.4 }} transition={{ type: 'spring', stiffness: 140, damping: 20 }}><img src={projects[0].image} alt="Morrow ecommerce concept on a desktop screen" width="1536" height="1024" fetchPriority="high" /></motion.div>
+    <motion.div className="hero-art__tile hero-art__tile--brand" animate={{ x: offset.x * -1.4, y: offset.y * -1.4, z: 28, rotateX: offset.y * 0.55, rotateY: offset.x * -0.65 }} transition={{ type: 'spring', stiffness: 150, damping: 22 }}><img src={projects[1].image} alt="Detail of Kindred brand identity concept" width="1536" height="1024" /></motion.div>
+    <motion.div className="hero-art__tile hero-art__tile--campaign" animate={{ x: offset.x * 1.7, y: offset.y * 1.7, z: 44, rotateX: offset.y * -0.7, rotateY: offset.x * 0.8 }} transition={{ type: 'spring', stiffness: 150, damping: 22 }}><img src={projects[2].image} alt="Detail of Frequency campaign concept" width="1536" height="1024" /></motion.div>
+    <motion.div className="hero-art__kinetic" animate={{ x: offset.x * -2, y: offset.y * -2, rotateX: offset.y, rotateY: offset.x }} transition={{ type: 'spring', stiffness: 120, damping: 18 }}><KineticSculpture /></motion.div>
+    <span className="hero-art__label">Strategy / Design / Growth</span>
   </div>
 }
 
