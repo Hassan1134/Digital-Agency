@@ -1,6 +1,6 @@
-# Growth Studio
+# Vergeform
 
-A complete, responsive React marketing website for a multidisciplinary digital agency. The working brand name is **Growth Studio** because no final agency identity was supplied. All business details and links are centralised in `src/config/agency.js`.
+A complete, responsive React marketing website for **Vergeform**, an independent multidisciplinary creative agency. The name combines **verge**—the edge of what is next—with **form**—the craft of turning strategy into something tangible. All business details and links are centralised in `src/config/agency.js`.
 
 ## Run locally
 

@@ -18,7 +18,7 @@ export function ProjectCard({ project, onOpen, index }) {
   const reset = () => setTilt({ rotateX: 0, rotateY: 0, y: 0 })
 
   return (
-    <article className={`project-card project-card--${index + 1}`}>
+    <article id={`project-${project.id}`} className={`project-card project-card--${index + 1}`}>
       <motion.button
         className="project-card__visual"
         onClick={() => onOpen(project)}

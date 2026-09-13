@@ -5,8 +5,8 @@ export function KineticSculpture() {
       <span className="kinetic-sculpture__orbit kinetic-sculpture__orbit--two" />
       <span className="kinetic-sculpture__orbit kinetic-sculpture__orbit--three" />
       <div className="kinetic-sculpture__cube">
-        <span className="kinetic-sculpture__face kinetic-sculpture__face--front">G</span>
-        <span className="kinetic-sculpture__face kinetic-sculpture__face--back">S</span>
+        <span className="kinetic-sculpture__face kinetic-sculpture__face--front">V</span>
+        <span className="kinetic-sculpture__face kinetic-sculpture__face--back">F</span>
         <span className="kinetic-sculpture__face kinetic-sculpture__face--right" />
         <span className="kinetic-sculpture__face kinetic-sculpture__face--left" />
         <span className="kinetic-sculpture__face kinetic-sculpture__face--top" />

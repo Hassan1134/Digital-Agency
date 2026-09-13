@@ -1,6 +1,6 @@
 export const agency = {
-  name: 'Growth Studio',
-  tagline: 'Independent brand, web, and growth partner for ambitious businesses.',
+  name: 'Vergeform',
+  tagline: 'Strategy, design, technology, and growth—shaped to move.',
   email: '',
   whatsapp: '',
   location: '',

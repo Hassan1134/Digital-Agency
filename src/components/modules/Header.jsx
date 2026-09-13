@@ -3,6 +3,7 @@ import { Menu, X } from 'lucide-react'
 import { NavLink, Link } from 'react-router-dom'
 import { agency, navItems } from '../../config/agency'
 import { Button } from '../elements/Button'
+import { BrandLogo } from '../elements/BrandLogo'
 import { useFocusTrap } from '../../hooks/useFocusTrap'
 
 export function Header() {
@@ -24,7 +25,7 @@ export function Header() {
   return (
     <header className={`site-header ${scrolled ? 'is-scrolled' : ''}`}>
       <div className="container site-header__inner">
-        <Link className="wordmark" to="/" aria-label={`${agency.name} home`}><span className="wordmark__mark">↗</span>{agency.name}</Link>
+        <Link className="wordmark" to="/" aria-label={`${agency.name} home`}><BrandLogo /></Link>
         <nav className="desktop-nav" aria-label="Primary navigation">
           {navItems.map((item) => <NavLink key={item.to} to={item.to} end={item.to === '/'}>{item.label}</NavLink>)}
         </nav>
