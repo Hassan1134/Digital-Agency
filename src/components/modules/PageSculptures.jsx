@@ -6,7 +6,7 @@ export function ServiceConstellation() {
       <div className="service-constellation__scene">
         <div className="service-constellation__ring">
           {serviceLabels.map((label, index) => (
-            <span className="service-constellation__card" style={{ '--item': index }} key={label}>{label}</span>
+            <span className="service-constellation__card" style={{ '--item-angle': `${index * 60}deg` }} key={label}>{label}</span>
           ))}
         </div>
         <div className="service-constellation__core"><span>01</span><i>06</i></div>
@@ -37,7 +37,7 @@ export function ContactPortal() {
     <div className="contact-portal" aria-hidden="true">
       <div className="contact-portal__stage">
         {[0, 1, 2, 3].map((index) => (
-          <span className="contact-portal__frame" style={{ '--frame': index }} key={index} />
+          <span className="contact-portal__frame" style={{ '--frame-depth': `${index * 70 - 100}px`, '--frame-delay': `${index * -0.8}s` }} key={index} />
         ))}
         <span className="contact-portal__message"><i /><i /><i /></span>
       </div>

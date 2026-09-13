@@ -19,7 +19,7 @@ npm run build
 npm run preview
 ```
 
-The production build outputs to `dist/` and prerenders `/`, `/about`, `/services`, and `/contact` as route-specific HTML with titles, descriptions, canonical URLs, and Open Graph metadata.
+The production build outputs to `dist/` and prerenders every marketing and blog route as route-specific HTML with titles, descriptions, canonical URLs, Open Graph metadata, structured article data, and FAQ schema. It also generates `sitemap.xml`, `robots.txt`, and an RSS feed at `rss.xml`.
 
 ## Configuration
 
@@ -45,6 +45,7 @@ The build creates physical `index.html` files for all four marketing routes, so 
 ## Content and concept work
 
 - Services, goals, projects, and FAQs are centralised in `src/data/content.js`.
+- Long-form insight articles, keyword clusters, FAQs, and primary research links are centralised in `src/data/blogPosts.js`.
 - All three examples are visibly identified as concept projects. Replace their records and local assets when approved portfolio work is available; do not remove the concept label until the relationship and claims can be verified.
 - No testimonials, client logos, awards, team identities, business history, prices, or performance results were invented.
 

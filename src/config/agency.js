@@ -14,5 +14,6 @@ export const navItems = [
   { label: 'Home', to: '/' },
   { label: 'About', to: '/about' },
   { label: 'Services', to: '/services' },
+  { label: 'Insights', to: '/blog' },
   { label: 'Contact', to: '/contact' },
 ]
