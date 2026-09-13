@@ -7,7 +7,7 @@ export const agency = {
   bookingUrl: '',
   socialLinks: [],
   siteUrl: import.meta.env.VITE_SITE_URL || 'https://example.com',
-  enquiryEndpoint: import.meta.env.VITE_ENQUIRY_ENDPOINT || '',
+  enquiryEndpoint: import.meta.env.VITE_ENQUIRY_ENDPOINT || '/api/enquiry',
 }
 
 export const navItems = [

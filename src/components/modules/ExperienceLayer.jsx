@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { ArrowUp } from 'lucide-react'
 import { AnimatePresence, motion, useMotionValueEvent, useReducedMotion, useScroll } from 'motion/react'
 import { CommandMenu } from './CommandMenu'
+import { ChatAgent } from './ChatAgent'
 
 export function ExperienceLayer() {
   const { scrollYProgress } = useScroll()
@@ -30,6 +31,7 @@ export function ExperienceLayer() {
       <div className="site-grid" aria-hidden="true" />
       <div className="site-spotlight" aria-hidden="true" />
       <CommandMenu />
+      <ChatAgent />
       <AnimatePresence>
         {showBackToTop && <motion.button
           className="back-to-top"

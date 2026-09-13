@@ -64,7 +64,11 @@ EXCEL_WEBHOOK_URL=<the private Power Automate HTTP POST URL>
 
 `EXCEL_WEBHOOK_URL` is server-only. Never rename it with a `VITE_` prefix and never commit its value. Variables prefixed with `VITE_` are included in browser code.
 
-The included `api/enquiry.js` follows the Vercel serverless-function convention. If the site uses Netlify, Cloudflare Pages, or another static host, move the handler into that provider's function directory and keep the public route `/api/enquiry` unchanged.
+### Netlify deployment
+
+This repository now includes `netlify/functions/enquiry.mjs` and routes it directly to `/api/enquiry`. In the Netlify dashboard, open **Project configuration → Environment variables**, create `EXCEL_WEBHOOK_URL`, paste the private Power Automate HTTP POST URL as its value, and redeploy. The variable must be available to Functions. Do not place the secret in `netlify.toml`.
+
+The included `api/enquiry.js` follows the Vercel serverless-function convention. Netlify uses the included `netlify/functions/enquiry.mjs` adapter. Other static hosts need an equivalent server function while keeping the public route `/api/enquiry` unchanged.
 
 ## 4. Verify before launch
 
