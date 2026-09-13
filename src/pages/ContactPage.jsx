@@ -2,6 +2,8 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { AlertCircle, ArrowLeft, Check, CheckCircle2, LoaderCircle } from 'lucide-react'
 import { useForm } from 'react-hook-form'
 import { useSearchParams } from 'react-router-dom'
+import Swal from 'sweetalert2'
+import 'sweetalert2/dist/sweetalert2.min.css'
 import { Button } from '../components/elements/Button'
 import { Seo } from '../components/modules/Seo'
 import { ContactPortal } from '../components/modules/PageSculptures'
@@ -20,7 +22,7 @@ export function ContactPage() {
   const [status, setStatus] = useState('idle')
   const [message, setMessage] = useState('')
   const summaryRef = useRef(null)
-  const { register, handleSubmit, trigger, setValue, formState: { errors, isSubmitting }, getValues } = useForm({ defaultValues: { services: [], goal: '', description: '', budget: '', timeline: '', name: '', email: '', company: '', website: '', phone: '' } })
+  const { register, handleSubmit, trigger, setValue, reset, formState: { errors, isSubmitting }, getValues } = useForm({ defaultValues: { services: [], goal: '', description: '', budget: '', timeline: '', name: '', email: '', company: '', website: '', phone: '', fax: '' } })
   const contactOptions = useMemo(() => [agency.email && { label: 'Email', value: agency.email, href: `mailto:${agency.email}` }, agency.whatsapp && { label: 'WhatsApp', value: agency.whatsapp, href: `https://wa.me/${agency.whatsapp.replace(/\D/g, '')}` }, agency.bookingUrl && { label: 'Book a call', value: 'Choose a time', href: agency.bookingUrl }].filter(Boolean), [])
   useEffect(() => { if (Object.keys(errors).length) summaryRef.current?.focus() }, [errors])
   useEffect(() => {
@@ -31,8 +33,20 @@ export function ContactPage() {
   const onSubmit = async (data) => {
     if (status === 'success' || isSubmitting) return
     setStatus('loading'); setMessage('')
-    try { await submitEnquiry(data); setStatus('success'); setMessage('Your enquiry has been confirmed as received.') }
-    catch (error) { setStatus(error instanceof DemoModeError ? 'demo' : 'error'); setMessage(error instanceof DemoModeError ? 'Demo only: no enquiry endpoint is configured, so your information has not been sent. Add VITE_ENQUIRY_ENDPOINT to enable live submission.' : error.message) }
+    try {
+      await submitEnquiry(data)
+      const successMessage = 'Your enquiry has been received and added to our project enquiries sheet.'
+      setStatus('success'); setMessage(successMessage); reset(); setStep(1)
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+      await Swal.fire({ icon: 'success', title: 'Enquiry sent', text: successMessage, confirmButtonText: 'Done', buttonsStyling: false, customClass: { popup: 'vergeform-swal', confirmButton: 'vergeform-swal__confirm' } })
+      setStatus('idle'); setMessage('')
+    }
+    catch (error) {
+      const isDemo = error instanceof DemoModeError
+      const failureMessage = isDemo ? 'Demo only: no enquiry endpoint is configured, so your information has not been sent.' : error.message
+      setStatus(isDemo ? 'demo' : 'error'); setMessage(failureMessage)
+      await Swal.fire({ icon: 'error', title: isDemo ? 'Form not connected' : 'Enquiry not sent', text: failureMessage, confirmButtonText: 'Try again', buttonsStyling: false, customClass: { popup: 'vergeform-swal', confirmButton: 'vergeform-swal__confirm' } })
+    }
   }
   const errorKeys = Object.keys(errors)
   return <>
@@ -41,6 +55,7 @@ export function ContactPage() {
       <div className="enquiry-card"><div className="form-progress" aria-label={`Step ${step} of 2`}><div><span>0{step}</span> / 02</div><div className="form-progress__track"><i style={{ width: `${step * 50}%` }} /></div><p>{step === 1 ? 'Project details' : 'Your details'}</p></div>
         {errorKeys.length > 0 && <div className="error-summary" ref={summaryRef} tabIndex="-1" role="alert"><AlertCircle /><div><strong>Please check the highlighted fields.</strong><ul>{errorKeys.map((key) => <li key={key}>{errors[key]?.message}</li>)}</ul></div></div>}
         <form onSubmit={handleSubmit(onSubmit)} noValidate>
+          <label className="form-honeypot" aria-hidden="true">Leave this field empty<input tabIndex="-1" autoComplete="off" {...register('fax')} /></label>
           <input type="hidden" {...register('goal')} />
           {step === 1 && <div className="form-step"><fieldset><legend>What do you need? <span>Required</span></legend><div className="checkbox-grid">{services.map((service) => <label key={service.id}><input type="checkbox" value={service.id} {...register('services', { validate: (value) => value.length > 0 || 'Choose at least one service.' })} /><span><i><Check /></i>{service.short}</span></label>)}</div>{errors.services && <p className="field-error">{errors.services.message}</p>}</fieldset><label className="field"><span>Tell us about the project <b>Required</b></span><textarea rows="7" placeholder="What are you building, changing, or trying to achieve?" {...register('description', { required: 'Add a short project description.', minLength: { value: 20, message: 'Please share at least 20 characters.' } })} />{errors.description && <small>{errors.description.message}</small>}</label><div className="form-pair"><label className="field"><span>Budget range <b>Optional</b></span><select {...register('budget')}><option value="">Select a range</option>{budgets.map((item) => <option key={item}>{item}</option>)}</select></label><label className="field"><span>Preferred timeline <b>Optional</b></span><select {...register('timeline')}><option value="">Select timing</option>{timelines.map((item) => <option key={item}>{item}</option>)}</select></label></div><Button type="button" onClick={next}>Continue to contact details</Button></div>}
           {step === 2 && <div className="form-step"><div className="form-pair"><label className="field"><span>Name <b>Required</b></span><input autoComplete="name" {...register('name', { required: 'Enter your name.' })} />{errors.name && <small>{errors.name.message}</small>}</label><label className="field"><span>Email <b>Required</b></span><input type="email" autoComplete="email" {...register('email', { required: 'Enter your email.', pattern: { value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, message: 'Enter a valid email address.' } })} />{errors.email && <small>{errors.email.message}</small>}</label></div><div className="form-pair"><label className="field"><span>Company <b>Optional</b></span><input autoComplete="organization" {...register('company')} /></label><label className="field"><span>Website URL <b>Optional</b></span><input type="url" placeholder="https://" {...register('website', { validate: (value) => !value || /^https?:\/\/.+/.test(value) || 'Use a full URL beginning with http:// or https://.' })} />{errors.website && <small>{errors.website.message}</small>}</label></div><label className="field"><span>Phone or WhatsApp <b>Optional</b></span><input type="tel" autoComplete="tel" {...register('phone')} /></label><p className="privacy-note">We use these details only to assess and respond to your enquiry. They are not added to a marketing list.</p>{status !== 'idle' && <div className={`submit-status submit-status--${status}`} role="status">{status === 'loading' ? <LoaderCircle className="spin" /> : status === 'success' ? <CheckCircle2 /> : <AlertCircle />}<p>{message || 'Sending your enquiry…'}</p></div>}<div className="form-actions"><button type="button" className="back-button" onClick={() => setStep(1)}><ArrowLeft /> Back</button><Button type="submit" disabled={isSubmitting || status === 'success'}>{isSubmitting ? 'Sending…' : agency.enquiryEndpoint ? 'Send enquiry' : 'Test demo submission'}</Button></div></div>}

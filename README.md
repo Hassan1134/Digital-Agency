@@ -29,14 +29,11 @@ The production build outputs to `dist/` and prerenders every marketing and blog 
 
 No structured data is emitted yet because no verified legal business details, address, or final production URL were supplied. Add those details only after they are confirmed.
 
-## Enquiry endpoint
+## Contact form and Excel
 
-Set `VITE_ENQUIRY_ENDPOINT` to an HTTPS endpoint that accepts a JSON `POST`. The payload contains:
+The contact form can add every validated enquiry to a private Microsoft Excel table through Power Automate. The browser posts to the same-site `/api/enquiry` function, which validates and normalises the submission before forwarding it to the private workflow. The Power Automate URL is never exposed in client JavaScript.
 
-- `services` (array of service IDs), `goal`, `description`, `budget`, and `timeline`
-- `name`, `email`, `company`, `website`, and `phone`
-
-The request lives in `src/services/enquiry.js`, keeping transport logic separate from the form. A successful UI state appears only after the endpoint returns a successful HTTP response. Without an endpoint, the button is explicitly labelled as a demo and the interface confirms that nothing was sent. Add server-side validation, rate limiting, bot protection, storage, and notification handling at the endpoint; never put secrets in Vite environment variables.
+Follow [`docs/excel-contact-integration.md`](docs/excel-contact-integration.md) to create the workbook, flow, and two deployment environment variables. Until `VITE_ENQUIRY_ENDPOINT` is configured, the form remains visibly in demo mode and does not claim that data was sent.
 
 ## Hosting and direct routes
 

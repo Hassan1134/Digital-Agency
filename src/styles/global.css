@@ -405,6 +405,7 @@ legend span, .field b { color: #70706b; font-size: .68rem; font-weight: 500; tex
 .checkbox-grid input:checked + span i { background: var(--lime); border-color: var(--charcoal); }
 .checkbox-grid input:checked + span i svg { opacity: 1; }
 .form-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.form-honeypot { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
 .field input, .field textarea, .field select { width: 100%; border: 1px solid #bbb9b2; border-radius: 0; padding: .9rem; color: var(--charcoal); background: #fffefa; }
 .field textarea { resize: vertical; }
 .field input:focus, .field textarea:focus, .field select:focus { outline: 2px solid var(--charcoal); outline-offset: 1px; }
@@ -420,6 +421,12 @@ legend span, .field b { color: #70706b; font-size: .68rem; font-weight: 500; tex
 .submit-status { margin: 0; color: #563600; background: #fff0bd; }
 .submit-status p { margin: 0; font-size: .84rem; line-height: 1.5; }
 .submit-status--success { color: #1e522d; background: #dff5e4; }
+.vergeform-swal { border: 1px solid #44443e; border-radius: 0; color: var(--ivory); background: #171715; font-family: Inter, Arial, sans-serif; box-shadow: 0 2rem 7rem rgba(0,0,0,.55); }
+.vergeform-swal .swal2-title { color: var(--ivory); font-family: 'Space Grotesk', sans-serif; letter-spacing: -.04em; }
+.vergeform-swal .swal2-html-container { color: #b9b9b2; line-height: 1.6; }
+.vergeform-swal__confirm { min-width: 9rem; padding: .9rem 1.25rem; border: 1px solid var(--lime); color: var(--charcoal); background: var(--lime); font-weight: 600; cursor: pointer; }
+.vergeform-swal__confirm:hover { background: #e1ff70; }
+.vergeform-swal__confirm:focus-visible { outline: 3px solid var(--ivory); outline-offset: 3px; }
 .spin { animation: spin 1s linear infinite; }
 @keyframes spin { to { transform: rotate(360deg); } }
 
