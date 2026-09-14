@@ -12,6 +12,9 @@ export const blogPosts = [
     primaryKeyword: 'AI agents in 2026',
     keywords: ['AI agents for business', 'autonomous AI', 'agentic AI', 'AI automation', 'enterprise AI agents', 'business AI strategy'],
     visual: 'agents',
+    relatedService: 'ai-solutions-automation',
+    image: '/blog/ai-agents.jpg',
+    imageAlt: 'Autonomous AI agent orchestration system connecting business tools and data workflows',
     intro: [
       'AI agents are moving business software from systems that wait for instructions to systems that can pursue a defined outcome. Instead of producing one response, an agent can interpret a goal, choose tools, complete several steps, check the result, and request human approval when a decision exceeds its authority.',
       'That shift is important, but autonomy is not the objective by itself. The business case depends on whether an agent can make a workflow faster, more consistent, easier to audit, or more valuable to the customer. The strongest 2026 implementations begin with a constrained process and expand only after the team can measure quality and control risk.',
@@ -46,6 +49,9 @@ export const blogPosts = [
     primaryKeyword: 'AI-native software development',
     keywords: ['AI software development', 'AI application development', 'agentic coding', 'AI development lifecycle', 'build AI applications', 'AI engineering'],
     visual: 'native',
+    relatedService: 'ai-solutions-automation',
+    image: '/blog/ai-native-development.jpg',
+    imageAlt: 'Layered AI-native application architecture connecting interface, data, and software components',
     intro: [
       'AI-native software is designed around model capabilities from the beginning. AI is not a chat box added after the product is complete; it participates in the product experience, the system architecture, and increasingly the process used to build and operate the application.',
       'For engineering teams, this creates a new development discipline. Requirements must describe acceptable behaviour, data boundaries, fallback states, and evaluation criteria. Architecture must handle probabilistic outputs. Delivery pipelines must test both conventional code and model-driven behaviour.',
@@ -80,6 +86,9 @@ export const blogPosts = [
     primaryKeyword: 'AI-powered cybersecurity',
     keywords: ['AI cybersecurity', 'AI threat detection', 'cybersecurity automation', 'generative AI security', 'AI security risks', 'autonomous security operations'],
     visual: 'security',
+    relatedService: 'ai-solutions-automation',
+    image: '/blog/ai-cybersecurity.jpg',
+    imageAlt: 'Cybersecurity shield detecting and blocking incoming digital threats with an active radar',
     intro: [
       'Artificial intelligence is changing the economics of cyber defence. Security teams can use AI to correlate signals, summarise incidents, identify suspicious behaviour, and accelerate investigation. Attackers can use the same class of technology to scale reconnaissance, social engineering, vulnerability research, and evasive content.',
       '“Fighting AI with AI” does not mean handing security to an autonomous black box. It means applying machine speed where it is useful while preserving strong identity, least privilege, tested controls, and human accountability.',
@@ -114,6 +123,9 @@ export const blogPosts = [
     primaryKeyword: 'future of full-stack development',
     keywords: ['AI full-stack development', 'future of web development', 'AI coding tools', 'full-stack developer skills 2026', 'agentic coding', 'software engineering careers'],
     visual: 'fullstack',
+    relatedService: 'web-design-development',
+    image: '/blog/full-stack-development.jpg',
+    imageAlt: 'Modern full-stack architecture with connected interface, application, database, and cloud layers',
     intro: [
       'AI can generate interfaces, APIs, database queries, tests, and deployment configuration. That does not make full-stack development irrelevant. It changes the valuable part of the job from producing every line manually to understanding the whole system and making reliable decisions across it.',
       'The strongest full-stack developers in the AI era combine broad product awareness with enough depth to verify architecture, security, performance, accessibility, data integrity, and operational behaviour. They use AI to increase range—not to outsource accountability.',
@@ -148,6 +160,9 @@ export const blogPosts = [
     primaryKeyword: 'AI automation for business',
     keywords: ['business process automation', 'AI workflow automation', 'processes to automate with AI', 'AI automation examples', 'enterprise automation', 'AI automation services'],
     visual: 'automation',
+    relatedService: 'ai-solutions-automation',
+    image: '/blog/business-automation.jpg',
+    imageAlt: 'Connected business automation pipeline moving work through multiple operational stages',
     intro: [
       'The best AI automation projects do not begin with a tool. They begin with a process that consumes time, moves through repeatable stages, and has an outcome the business can measure. AI becomes useful when the process also contains language, documents, judgment, or exceptions that traditional rules struggle to handle.',
       'Companies can automate meaningful parts of many workflows today, but “automate” should not mean “remove every person.” A reliable design separates machine-speed preparation and execution from the approvals, relationships, and accountability that belong with people.',

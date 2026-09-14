@@ -8,7 +8,7 @@ import { useFocusTrap } from '../../hooks/useFocusTrap'
 const commands = [
   ...navItems.map((item) => ({ label: item.label, detail: 'Page', to: item.to })),
   ...projects.map((project) => ({ label: project.name, detail: `Project / ${project.sector}`, to: `/#project-${project.id}` })),
-  ...services.map((service) => ({ label: service.short, detail: 'Service', to: `/services#${service.id}` })),
+  ...services.map((service) => ({ label: service.short, detail: 'Service', to: `/services/${service.id}` })),
 ]
 
 export function CommandMenu() {

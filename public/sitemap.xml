@@ -1,13 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://example.com/</loc></url>
-  <url><loc>https://example.com/about</loc></url>
-  <url><loc>https://example.com/services</loc></url>
-  <url><loc>https://example.com/blog</loc></url>
-  <url><loc>https://example.com/blog/ai-agents-2026-autonomous-ai-business</loc></url>
-  <url><loc>https://example.com/blog/ai-native-software-development</loc></url>
-  <url><loc>https://example.com/blog/ai-powered-cybersecurity-fighting-ai-with-ai</loc></url>
-  <url><loc>https://example.com/blog/future-full-stack-development-ai</loc></url>
-  <url><loc>https://example.com/blog/ai-automation-business-processes</loc></url>
-  <url><loc>https://example.com/contact</loc></url>
+  <url><loc>https://vergeform.netlify.app/</loc></url>
+  <url><loc>https://vergeform.netlify.app/about</loc></url>
+  <url><loc>https://vergeform.netlify.app/services</loc></url>
+  <url><loc>https://vergeform.netlify.app/services/web-design-development</loc></url>
+  <url><loc>https://vergeform.netlify.app/services/ai-solutions-automation</loc></url>
+  <url><loc>https://vergeform.netlify.app/services/branding-ui-ux</loc></url>
+  <url><loc>https://vergeform.netlify.app/services/seo-content</loc></url>
+  <url><loc>https://vergeform.netlify.app/services/paid-advertising</loc></url>
+  <url><loc>https://vergeform.netlify.app/services/social-media</loc></url>
+  <url><loc>https://vergeform.netlify.app/services/content-creative</loc></url>
+  <url><loc>https://vergeform.netlify.app/blog</loc></url>
+  <url><loc>https://vergeform.netlify.app/blog/ai-agents-2026-autonomous-ai-business</loc></url>
+  <url><loc>https://vergeform.netlify.app/blog/ai-native-software-development</loc></url>
+  <url><loc>https://vergeform.netlify.app/blog/ai-powered-cybersecurity-fighting-ai-with-ai</loc></url>
+  <url><loc>https://vergeform.netlify.app/blog/future-full-stack-development-ai</loc></url>
+  <url><loc>https://vergeform.netlify.app/blog/ai-automation-business-processes</loc></url>
+  <url><loc>https://vergeform.netlify.app/contact</loc></url>
 </urlset>

@@ -40,6 +40,15 @@ export const services = [
     goals: ['launch', 'website', 'enquiries', 'sales'],
   },
   {
+    id: 'ai-solutions-automation', short: 'AI Solutions & Automation', title: 'AI Solutions & Business Automation', icon: 'Bot',
+    intro: 'Practical AI agents, integrations, and workflow automation designed around a measurable business outcome.',
+    suits: 'Teams with repetitive knowledge work, fragmented tools, slow handoffs, or a clear opportunity to improve a customer or employee workflow.',
+    problem: 'Important work is trapped in manual steps, disconnected systems, or generic AI experiments that never become reliable operations.',
+    deliverables: ['AI opportunity and workflow audit', 'Agent or chatbot experience design', 'Data and integration architecture', 'Prototype and evaluation set', 'Human approval and safety controls', 'Production rollout and measurement plan'],
+    process: 'We map the workflow and risk, establish a baseline, prototype a bounded solution, evaluate real cases, and expand automation only when the evidence supports it.',
+    goals: ['launch', 'website', 'enquiries', 'sales'],
+  },
+  {
     id: 'branding-ui-ux', short: 'Branding & UI/UX', title: 'Branding & UI/UX Design', icon: 'Shapes',
     intro: 'A clear identity and digital experience that help the right audience recognise and trust you.',
     suits: 'New brands, growing companies preparing for a next chapter, and digital products needing more clarity.',

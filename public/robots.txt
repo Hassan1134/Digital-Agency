@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /api/
 
-Sitemap: https://example.com/sitemap.xml
+Sitemap: https://vergeform.netlify.app/sitemap.xml

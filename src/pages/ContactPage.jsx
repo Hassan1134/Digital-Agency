@@ -2,17 +2,74 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { AlertCircle, ArrowLeft, Check, CheckCircle2, LoaderCircle } from 'lucide-react'
 import { useForm } from 'react-hook-form'
 import { useSearchParams } from 'react-router-dom'
-import Swal from 'sweetalert2'
-import 'sweetalert2/dist/sweetalert2.min.css'
 import { Button } from '../components/elements/Button'
 import { Seo } from '../components/modules/Seo'
 import { ContactPortal } from '../components/modules/PageSculptures'
 import { agency } from '../config/agency'
 import { goals, services } from '../data/content'
+import { siteSeo } from '../data/seo'
 import { DemoModeError, submitEnquiry } from '../services/enquiry'
 
 const budgets = ['Not sure yet', 'Under $5,000', '$5,000–$15,000', '$15,000–$30,000', '$30,000+']
 const timelines = ['As soon as practical', 'Within 1–2 months', 'Within 3–6 months', 'Flexible / exploring']
+const showAlert = async (options) => {
+  const [{ default: Swal }] = await Promise.all([
+    import('sweetalert2'),
+    import('sweetalert2/dist/sweetalert2.min.css'),
+  ])
+  return Swal.fire(options)
+}
+const siteOrigin = agency.siteUrl.replace(/\/$/, '')
+const homeUrl = `${siteOrigin}/`
+const contactUrl = `${siteOrigin}${siteSeo.contact.path}`
+const organizationId = `${homeUrl}#organization`
+const websiteId = `${homeUrl}#website`
+const breadcrumbId = `${contactUrl}#breadcrumb`
+const contactSchema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'ContactPage',
+      '@id': `${contactUrl}#webpage`,
+      url: contactUrl,
+      name: siteSeo.contact.title,
+      description: siteSeo.contact.description,
+      isPartOf: { '@id': websiteId },
+      about: { '@id': organizationId },
+      mainEntity: { '@id': organizationId },
+      breadcrumb: { '@id': breadcrumbId },
+      inLanguage: 'en',
+    },
+    {
+      '@type': 'BreadcrumbList',
+      '@id': breadcrumbId,
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: homeUrl },
+        { '@type': 'ListItem', position: 2, name: 'Contact', item: contactUrl },
+      ],
+    },
+    {
+      '@type': 'Organization',
+      '@id': organizationId,
+      name: agency.name,
+      url: homeUrl,
+      ...(agency.email ? { email: agency.email } : {}),
+      ...(agency.whatsapp ? { telephone: agency.whatsapp } : {}),
+      ...(agency.location ? { location: { '@type': 'Place', name: agency.location } } : {}),
+      ...((agency.email || agency.whatsapp) ? {
+        contactPoint: {
+          '@type': 'ContactPoint',
+          contactType: 'sales',
+          ...(agency.email ? { email: agency.email } : {}),
+          ...(agency.whatsapp ? { telephone: agency.whatsapp } : {}),
+          availableLanguage: ['English'],
+        },
+      } : {}),
+      ...(agency.socialLinks.length ? { sameAs: agency.socialLinks.map((social) => social.url).filter(Boolean) } : {}),
+    },
+    { '@type': 'WebSite', '@id': websiteId, name: agency.name, url: homeUrl, publisher: { '@id': organizationId } },
+  ],
+}
 
 export function ContactPage() {
   const [params] = useSearchParams()
@@ -38,19 +95,19 @@ export function ContactPage() {
       const successMessage = 'Your enquiry has been received and added to our project enquiries sheet.'
       setStatus('success'); setMessage(successMessage); reset(); setStep(1)
       window.scrollTo({ top: 0, behavior: 'smooth' })
-      await Swal.fire({ icon: 'success', title: 'Enquiry sent', text: successMessage, confirmButtonText: 'Done', buttonsStyling: false, customClass: { popup: 'vergeform-swal', confirmButton: 'vergeform-swal__confirm' } })
+      await showAlert({ icon: 'success', title: 'Enquiry sent', text: successMessage, confirmButtonText: 'Done', buttonsStyling: false, customClass: { popup: 'vergeform-swal', confirmButton: 'vergeform-swal__confirm' } })
       setStatus('idle'); setMessage('')
     }
     catch (error) {
       const isDemo = error instanceof DemoModeError
       const failureMessage = isDemo ? 'Demo only: no enquiry endpoint is configured, so your information has not been sent.' : error.message
       setStatus(isDemo ? 'demo' : 'error'); setMessage(failureMessage)
-      await Swal.fire({ icon: 'error', title: isDemo ? 'Form not connected' : 'Enquiry not sent', text: failureMessage, confirmButtonText: 'Try again', buttonsStyling: false, customClass: { popup: 'vergeform-swal', confirmButton: 'vergeform-swal__confirm' } })
+      await showAlert({ icon: 'error', title: isDemo ? 'Form not connected' : 'Enquiry not sent', text: failureMessage, confirmButtonText: 'Try again', buttonsStyling: false, customClass: { popup: 'vergeform-swal', confirmButton: 'vergeform-swal__confirm' } })
     }
   }
   const errorKeys = Object.keys(errors)
   return <>
-    <Seo title="Contact — Vergeform" description="Tell Vergeform about your website, brand, or marketing project." path="/contact" />
+    <Seo {...siteSeo.contact} schema={contactSchema} />
     <section className="contact-page surface-dark"><div className="container contact-layout"><aside className="contact-intro"><p className="eyebrow">Start a project</p><h1>Tell us what you<br /><em>want to build.</em></h1><p className="lede">A few useful details will help us understand the opportunity and suggest a sensible next step.</p><ContactPortal /><div className="next-steps"><h2>What happens next</h2><ol><li><span>01</span>We review your goals, context, and requested services.</li><li><span>02</span>If the fit looks useful, we agree on a discovery conversation.</li><li><span>03</span>You receive a tailored scope and proposal—never a generic package.</li></ol></div>{contactOptions.length > 0 && <div className="direct-contact"><p className="mini-label">Prefer another route?</p>{contactOptions.map((item) => <a key={item.href} href={item.href}><span>{item.label}</span>{item.value}</a>)}</div>}</aside>
       <div className="enquiry-card"><div className="form-progress" aria-label={`Step ${step} of 2`}><div><span>0{step}</span> / 02</div><div className="form-progress__track"><i style={{ width: `${step * 50}%` }} /></div><p>{step === 1 ? 'Project details' : 'Your details'}</p></div>
         {errorKeys.length > 0 && <div className="error-summary" ref={summaryRef} tabIndex="-1" role="alert"><AlertCircle /><div><strong>Please check the highlighted fields.</strong><ul>{errorKeys.map((key) => <li key={key}>{errors[key]?.message}</li>)}</ul></div></div>}

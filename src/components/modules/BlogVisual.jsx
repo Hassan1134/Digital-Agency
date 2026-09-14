@@ -8,17 +8,18 @@ const visualThemes = {
   automation: { Icon: Workflow, code: '05', label: 'Connected operations', short: 'FLOW' },
 }
 
-export function BlogVisual({ variant = 'agents' }) {
+export function BlogVisual({ variant = 'agents', image, imageAlt = '', priority = false }) {
   const theme = visualThemes[variant] || visualThemes.agents
   const Icon = theme.Icon
 
   return (
-    <div className={`blog-visual blog-visual--${variant}`} aria-hidden="true">
-      <div className="blog-visual__atmosphere" />
-      <div className="blog-visual__grid" />
-      <div className="blog-visual__header"><span>{theme.label}</span><b>VF / {theme.code}</b></div>
-      <div className="blog-visual__core"><Icon strokeWidth={1.35} /><span>{theme.short}</span></div>
-      <div className="blog-visual__particles">
+    <div className={`blog-visual blog-visual--${variant}`}>
+      {image && <img className="blog-visual__image" src={image} alt={imageAlt} width="1200" height="675" loading={priority ? 'eager' : 'lazy'} fetchPriority={priority ? 'high' : 'auto'} />}
+      <div className="blog-visual__atmosphere" aria-hidden="true" />
+      <div className="blog-visual__grid" aria-hidden="true" />
+      <div className="blog-visual__header" aria-hidden="true"><span>{theme.label}</span><b>VF / {theme.code}</b></div>
+      <div className="blog-visual__core" aria-hidden="true"><Icon strokeWidth={1.35} /><span>{theme.short}</span></div>
+      <div className="blog-visual__particles" aria-hidden="true">
         {[0, 1, 2, 3, 4, 5].map((index) => <i style={{
           '--visual-index': index,
           '--visual-angle': `${index * 60}deg`,
@@ -32,7 +33,7 @@ export function BlogVisual({ variant = 'agents' }) {
           '--automation-top': `${20 + index * 10}%`,
         }} key={index} />)}
       </div>
-      <div className="blog-visual__markers"><b /><b /><b /></div>
+      <div className="blog-visual__markers" aria-hidden="true"><b /><b /><b /></div>
     </div>
   )
 }
