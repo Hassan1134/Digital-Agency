@@ -1,7 +1,7 @@
 export const agency = {
   name: 'Vergeform',
   legalName: 'Vergeform',
-  description: 'A digital agency creating high-performance websites, distinctive brands, AI solutions, SEO, content, and growth campaigns.',
+  description: 'A full-service digital agency for websites, ecommerce, software, mobile apps, branding, AI, marketing, analytics, security, and ongoing growth.',
   tagline: 'Strategy, design, technology, and growth—shaped to move.',
   email: '',
   whatsapp: '',

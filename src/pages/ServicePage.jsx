@@ -26,7 +26,12 @@ export function ServicePage() {
       { '@type': 'FAQPage', mainEntity: seo.faqs.map(([question, answer]) => ({ '@type': 'Question', name: question, acceptedAnswer: { '@type': 'Answer', text: answer } })) },
     ],
   }
-  const related = services.filter((item) => item.id !== service.id).slice(0, 3)
+  const related = services
+    .filter((item) => item.id !== service.id)
+    .map((item) => ({ item, relevance: item.goals.filter((goal) => service.goals.includes(goal)).length }))
+    .sort((a, b) => b.relevance - a.relevance)
+    .slice(0, 3)
+    .map(({ item }) => item)
 
   return <>
     <Seo title={seo.title} description={seo.description} path={path} keywords={[seo.primaryKeyword, ...seo.keywords]} schema={schema} />
