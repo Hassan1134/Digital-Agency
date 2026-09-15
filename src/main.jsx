@@ -6,5 +6,5 @@ import './styles/global.css'
 
 const app = <StrictMode><BrowserRouter><App /></BrowserRouter></StrictMode>
 const root = document.getElementById('root')
-if (root.hasChildNodes()) hydrateRoot(root, app)
+if (root.childElementCount > 0) hydrateRoot(root, app)
 else createRoot(root).render(app)
