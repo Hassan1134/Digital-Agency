@@ -15,6 +15,7 @@ import { agency } from '../config/agency'
 import { faqs, projects, services } from '../data/content'
 import { siteSeo } from '../data/seo'
 import { useMediaQuery } from '../hooks/useMediaQuery'
+import { industries } from '../data/siteContent'
 
 const workFilters = [
   { id: 'all', label: 'All work' },
@@ -124,6 +125,7 @@ export function HomePage() {
     <section className="section process-section"><div className="container"><div className="section-heading"><p className="eyebrow">How it works · 04</p><h2>From first question<br />to forward motion.</h2></div><div className="process-grid">{[['Discover','A focused brief, stakeholder insight, and a shared definition of success.'],['Plan','A prioritised roadmap, creative direction, and clearly staged deliverables.'],['Create','Visible work-in-progress, purposeful review rounds, and a flexible design system.'],['Launch & Improve','Quality checks, a confident handover, and a practical next-step plan.']].map(([title, text], index) => <Reveal key={title} delay={index * .05} className="process-step"><span>0{index + 1}</span><h3>{title}</h3><p>{text}</p>{index < 3 && <ArrowUpRight aria-hidden="true" />}</Reveal>)}</div></div></section>
 
     <section className="section faq-section"><div className="container faq-grid"><div><p className="eyebrow">Good questions · 05</p><h2>Before we<br />begin.</h2><p>Clear answers make better starting points. If yours is not here, include it in your enquiry.</p><Button to="/contact" variant="secondary">Ask a question</Button></div><Accordion items={faqs} /></div></section>
+    <section className="section proof-section surface-dark"><div className="container"><div className="section-heading section-heading--light"><p className="eyebrow">A joined-up model</p><h2>Broad capability.<br />One accountable partner.</h2><p>Every capability is connected through one strategy, one delivery rhythm, and one view of the customer journey.</p></div><div className="proof-stats"><div><strong>{String(services.length).padStart(2, '0')}</strong><span>Connected capabilities</span></div><div><strong>{String(industries.length).padStart(2, '0')}</strong><span>Sector pathways</span></div><div><strong>01</strong><span>Shared direction</span></div></div>{agency.clientLogos.length > 0 && <div className="client-logos" aria-label="Selected clients">{agency.clientLogos.map((client) => <span key={client}>{client}</span>)}</div>}{agency.testimonials.length > 0 && <div className="testimonial-grid">{agency.testimonials.map((item) => <figure key={`${item.name}-${item.company}`}><blockquote>“{item.quote}”</blockquote><figcaption>{item.name} · {item.role}, {item.company}</figcaption></figure>)}</div>}</div></section>
     <CTASection />
     <ProjectDialog project={project} onClose={closeProject} />
   </>

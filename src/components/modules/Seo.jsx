@@ -51,6 +51,7 @@ export function Seo({
     setMeta('meta[name="robots"]', { name: 'robots' }, robots)
     setMeta('meta[name="googlebot"]', { name: 'googlebot' }, robots)
     setMeta('meta[name="author"]', { name: 'author' }, type === 'article' ? 'Vergeform Editorial' : agency.name)
+    if (agency.searchVerification) setMeta('meta[name="google-site-verification"]', { name: 'google-site-verification' }, agency.searchVerification)
     setMeta('meta[name="keywords"]', { name: 'keywords' }, keywordContent)
     setMeta('meta[property="og:title"]', { property: 'og:title' }, title)
     setMeta('meta[property="og:description"]', { property: 'og:description' }, description)
@@ -80,6 +81,14 @@ export function Seo({
     setLink('link[rel="alternate"][hreflang="x-default"]', { rel: 'alternate', hreflang: 'x-default' }, canonicalUrl)
   }, [description, image, imageAlt, keywordContent, modifiedTime, noIndex, path, publishedTime, title, type])
 
-  if (!schema) return null
-  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema).replace(/</g, '\\u003c') }} />
+  const effectiveSchema = schema || {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: title,
+    description,
+    url: new URL(path, agency.siteUrl).href,
+    isPartOf: { '@type': 'WebSite', name: agency.name, url: agency.siteUrl },
+    inLanguage: 'en',
+  }
+  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(effectiveSchema).replace(/</g, '\\u003c') }} />
 }

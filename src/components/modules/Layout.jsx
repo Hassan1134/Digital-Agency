@@ -5,6 +5,7 @@ import { Header } from './Header'
 import { Footer } from './Footer'
 import { ExperienceLayer } from './ExperienceLayer'
 import { SiteLoader } from './SiteLoader'
+import { AnalyticsConsent } from './AnalyticsConsent'
 
 export function Layout() {
   const location = useLocation()
@@ -26,6 +27,7 @@ export function Layout() {
       <AnimatePresence>{loading && <SiteLoader key="site-loader" onComplete={finishLoading} />}</AnimatePresence>
       <a className="skip-link" href="#main">Skip to content</a>
       <ExperienceLayer />
+      <AnalyticsConsent />
       <Header />
       <AnimatePresence mode="wait" initial={false}>
         <motion.main id="main" key={location.pathname} tabIndex="-1" initial={reduced ? false : { opacity: 0 }} animate={{ opacity: 1 }} exit={reduced ? undefined : { opacity: 0 }} transition={{ duration: 0.18 }}>

@@ -3,6 +3,7 @@ import { resolve } from 'node:path'
 import { loadEnv } from 'vite'
 import { blogPosts } from '../src/data/blogPosts.js'
 import { serviceSeo, siteSeo } from '../src/data/seo.js'
+import { industries } from '../src/data/siteContent.js'
 
 const root = resolve(process.cwd())
 const dist = resolve(root, 'dist')
@@ -16,6 +17,12 @@ const routes = [
   siteSeo.blog.path,
   ...blogPosts.map((post) => `/blog/${post.slug}`),
   siteSeo.contact.path,
+  siteSeo.process.path,
+  siteSeo.industries.path,
+  ...industries.map((industry) => `/industries/${industry.id}`),
+  siteSeo.resources.path,
+  '/privacy',
+  '/accessibility',
 ]
 const articleRoutes = new Map(blogPosts.map((post) => [`/blog/${post.slug}`, post]))
 

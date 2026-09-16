@@ -16,11 +16,11 @@ export function Footer() {
         <div className="footer-top"><p className="eyebrow">Have a project in mind?</p><h2>Make the next move<br /><span>mean something.</span></h2><Button to="/contact">Start a Project</Button></div>
         <div className="footer-grid">
           <div><Link className="wordmark" to="/" aria-label={`${agency.name} home`}><BrandLogo showDescriptor /></Link><p>{agency.tagline}</p>{agency.location && <p>{agency.location}</p>}</div>
-          <div><h3>Explore</h3>{navItems.map((item) => <Link key={item.to} to={item.to}>{item.label}</Link>)}</div>
+          <div><h3>Explore</h3>{navItems.map((item) => <Link key={item.to} to={item.to}>{item.label}</Link>)}<Link to="/resources">Free resources</Link></div>
           <div><h3>Services</h3>{services.map((service) => <Link key={service.id} to={`/services/${service.id}`}>{service.short}</Link>)}</div>
           {contacts.length > 0 && <div><h3>Contact</h3>{contacts.map((contact) => <a key={contact.href} href={contact.href}>{contact.label}</a>)}{agency.socialLinks.map((social) => <a key={social.url} href={social.url}>{social.label}</a>)}</div>}
         </div>
-        <div className="footer-bottom"><span>© {new Date().getFullYear()} {agency.name}</span><span>Strategy · Design · Technology · Growth</span></div>
+        <div className="footer-bottom"><span>© {new Date().getFullYear()} {agency.name}</span><nav aria-label="Legal"><Link to="/privacy">Privacy</Link><Link to="/cookies">Cookies</Link><Link to="/accessibility">Accessibility</Link><Link to="/terms">Terms</Link></nav><span>Strategy · Design · Technology · Growth</span></div>
       </div>
     </footer>
   )

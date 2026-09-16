@@ -34,7 +34,7 @@ export function ProjectCard({ project, onOpen, index }) {
         <span className="project-card__open">View project <ArrowUpRight size={18} /></span>
         <span className="project-card__depth-line" aria-hidden="true" />
       </motion.button>
-      <div className="project-card__meta"><div><Badge>Concept project</Badge><p className="eyebrow">{project.sector}</p><h3>{project.name}</h3></div><p>{project.summary}</p></div>
+      <div className="project-card__meta"><div><Badge tone={project.client ? 'lime' : undefined}>{project.client ? 'Client case study' : 'Concept project'}</Badge><p className="eyebrow">{project.sector}</p><h3>{project.name}</h3></div><p>{project.summary}</p></div>
       <div className="project-card__tags">{project.services.map((service) => <span key={service}>{service}</span>)}</div>
     </article>
   )

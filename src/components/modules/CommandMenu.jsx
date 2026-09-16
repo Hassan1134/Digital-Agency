@@ -3,12 +3,16 @@ import { ArrowUpRight, Command, Search, X } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 import { navItems } from '../../config/agency'
 import { projects, services } from '../../data/content'
+import { industries, resources } from '../../data/siteContent'
 import { useFocusTrap } from '../../hooks/useFocusTrap'
 
 const commands = [
   ...navItems.map((item) => ({ label: item.label, detail: 'Page', to: item.to })),
   ...projects.map((project) => ({ label: project.name, detail: `Project / ${project.sector}`, to: `/#project-${project.id}` })),
   ...services.map((service) => ({ label: service.short, detail: 'Service', to: `/services/${service.id}` })),
+  ...industries.map((industry) => ({ label: industry.name, detail: 'Industry', to: `/industries/${industry.id}` })),
+  ...resources.map((resource) => ({ label: resource.title, detail: 'Free resource', to: `/resources#${resource.id}` })),
+  { label: 'Free resources', detail: 'Page', to: '/resources' },
 ]
 
 export function CommandMenu() {

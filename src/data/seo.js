@@ -34,6 +34,27 @@ export const siteSeo = {
     path: '/contact',
     keywords: ['contact digital agency', 'hire web design agency', 'request website proposal', 'hire branding agency', 'AI development enquiry'],
   },
+  process: {
+    updatedAt: '2026-09-16',
+    title: 'Our Digital Project Process | Vergeform',
+    description: 'See how Vergeform takes digital projects from discovery and definition through design, development, validation, launch, and measured improvement.',
+    path: '/process',
+    keywords: ['digital agency process', 'website project process', 'software development process', 'design agency workflow'],
+  },
+  industries: {
+    updatedAt: '2026-09-16',
+    title: 'Industry-Focused Digital Services | Vergeform',
+    description: 'Explore connected digital services for startups, SaaS, ecommerce, professional services, healthcare, property, education, and training organisations.',
+    path: '/industries',
+    keywords: ['industry digital agency', 'ecommerce digital agency', 'SaaS design agency', 'professional services marketing'],
+  },
+  resources: {
+    updatedAt: '2026-09-16',
+    title: 'Free Digital Strategy Checklists & Tools | Vergeform',
+    description: 'Use practical, ungated checklists for website launches, brand briefs, ecommerce conversion, and responsible AI opportunity planning.',
+    path: '/resources',
+    keywords: ['website launch checklist', 'brand brief template', 'ecommerce conversion checklist', 'AI opportunity assessment'],
+  },
 }
 
 export const serviceSeo = {

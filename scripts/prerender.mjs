@@ -4,6 +4,7 @@ import { pathToFileURL } from 'node:url'
 import { loadEnv } from 'vite'
 import { blogPosts, publishedAt } from '../src/data/blogPosts.js'
 import { serviceSeo, siteSeo } from '../src/data/seo.js'
+import { industries } from '../src/data/siteContent.js'
 
 const root = resolve(process.cwd())
 const template = await readFile(resolve(root, 'dist/index.html'), 'utf8')
@@ -54,6 +55,14 @@ const routes = [
     lastModified: post.modifiedAt || publishedAt,
   })),
   { ...siteSeo.contact, lastModified: siteSeo.contact.updatedAt },
+  { ...siteSeo.process, lastModified: siteSeo.process.updatedAt },
+  { ...siteSeo.industries, lastModified: siteSeo.industries.updatedAt },
+  ...industries.map((industry) => ({ path: `/industries/${industry.id}`, title: `${industry.name} Digital Services | Vergeform`, description: industry.intro, keywords: [`${industry.name} digital agency`, `${industry.name} website services`], lastModified: '2026-09-16' })),
+  { ...siteSeo.resources, lastModified: siteSeo.resources.updatedAt },
+  { path: '/privacy', title: 'Privacy Notice | Vergeform', description: 'How Vergeform handles information submitted through this website.', lastModified: '2026-09-16' },
+  { path: '/accessibility', title: 'Accessibility Statement | Vergeform', description: 'Vergeform’s commitment to a digital experience that more people can use.', lastModified: '2026-09-16' },
+  { path: '/cookies', title: 'Cookie Notice | Vergeform', description: 'How Vergeform uses essential storage and optional consent-based analytics.', noIndex: true, lastModified: '2026-09-16' },
+  { path: '/terms', title: 'Website Terms | Vergeform', description: 'General conditions for using the Vergeform website and its free resources.', noIndex: true, lastModified: '2026-09-16' },
 ]
 
 const replaceMeta = (html, attribute, key, content) => html.replace(
@@ -123,7 +132,7 @@ const notFoundHtml = createHtml({
 })
 await writeFile(resolve(root, 'dist/404.html'), notFoundHtml)
 
-const urls = routes.map((route) => {
+const urls = routes.filter((route) => !route.noIndex).map((route) => {
   const location = new URL(route.path === '/' ? '/' : route.path, `${siteUrl}/`).href
   return `  <url>\n    <loc>${escapeXml(location)}</loc>\n    <lastmod>${escapeXml(route.lastModified)}</lastmod>\n  </url>`
 }).join('\n')
