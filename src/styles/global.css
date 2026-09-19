@@ -21,7 +21,7 @@
 html { scroll-behavior: smooth; scroll-padding-top: 5.5rem; }
 body { margin: 0; min-width: 320px; overflow-x: hidden; background: var(--ivory); }
 body.is-site-loading { overflow: hidden; }
-body.has-command-menu, body.has-project-dialog { overflow: hidden; }
+body.has-command-menu, body.has-project-dialog, body.has-mobile-menu { overflow: hidden; }
 body, button, input, textarea, select { font: inherit; }
 button, a { -webkit-tap-highlight-color: transparent; }
 button { color: inherit; }
@@ -103,14 +103,19 @@ main:focus { outline: none; }
 .header-cta { min-height: 2.75rem; padding-block: .7rem; }
 .menu-toggle, .mobile-header-cta { display: none; }
 .menu-toggle { border: 0; background: none; cursor: pointer; }
-.menu-backdrop { position: fixed; z-index: 101; inset: 0; display: flex; justify-content: flex-end; background: rgba(0,0,0,.55); }
-.mobile-menu { display: flex; width: min(90vw, 30rem); height: 100%; flex-direction: column; padding: 1.5rem; color: var(--ivory); background: var(--dark); }
-.mobile-menu__top { display: flex; align-items: center; justify-content: space-between; padding-bottom: 3rem; color: var(--muted); text-transform: uppercase; letter-spacing: .1em; }
+.menu-backdrop { position: fixed; z-index: 1500; inset: 0; display: flex; min-height: 100vh; min-height: 100dvh; justify-content: flex-end; isolation: isolate; background: rgba(0,0,0,.72); animation: mobile-backdrop-in .2s ease-out both; }
+.mobile-menu { display: flex; width: min(90vw, 30rem); height: 100vh; height: 100dvh; max-height: 100dvh; flex-direction: column; overflow: hidden; color: var(--ivory); background: var(--dark); box-shadow: -1.5rem 0 4rem rgba(0,0,0,.32); animation: mobile-menu-in .3s cubic-bezier(.22,1,.36,1) both; }
+.mobile-menu__top { display: flex; min-height: 5rem; flex: 0 0 auto; align-items: center; justify-content: space-between; padding: 1.15rem 1.5rem; border-bottom: 1px solid #3a3a35; color: var(--muted); text-transform: uppercase; letter-spacing: .1em; }
 .mobile-menu button { border: 0; color: var(--ivory); background: none; cursor: pointer; }
-.mobile-menu nav { display: grid; margin-bottom: auto; }
-.mobile-menu nav a { display: flex; align-items: baseline; gap: 1rem; padding: 1.1rem 0; border-bottom: 1px solid #3a3a35; font-family: 'Space Grotesk'; font-size: 2.3rem; }
+.mobile-menu__top button { display: grid; width: 2.75rem; height: 2.75rem; flex: 0 0 auto; place-items: center; }
+.mobile-menu nav { display: grid; min-height: 0; flex: 1 1 auto; align-content: start; padding-inline: 1.5rem; overflow-y: auto; overscroll-behavior: contain; }
+.mobile-menu nav a { display: flex; align-items: baseline; gap: 1rem; padding: 1.1rem 0; border-bottom: 1px solid #3a3a35; font-family: 'Space Grotesk'; font-size: clamp(1.7rem,7vw,2.3rem); }
 .mobile-menu nav a span { color: var(--muted); font: 600 .65rem Inter; letter-spacing: .12em; }
 .mobile-menu nav a.active { color: var(--lime); }
+.mobile-menu > .button { width: calc(100% - 3rem); flex: 0 0 auto; margin: 1rem 1.5rem max(1rem,env(safe-area-inset-bottom)); }
+body.has-mobile-menu .command-trigger, body.has-mobile-menu .back-to-top, body.has-mobile-menu .chat-launcher, body.has-mobile-menu .chat-agent, body.has-mobile-menu .analytics-consent { visibility: hidden; pointer-events: none; }
+@keyframes mobile-backdrop-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes mobile-menu-in { from { transform: translateX(100%); } to { transform: translateX(0); } }
 .command-trigger { position: fixed; z-index: 95; bottom: 1.25rem; left: 1.25rem; display: inline-flex; min-height: 2.8rem; align-items: center; gap: .6rem; padding: .55rem .65rem .55rem .8rem; border: 1px solid rgba(245,243,237,.2); color: var(--ivory); background: rgba(17,17,17,.88); box-shadow: 0 .8rem 2.5rem rgba(0,0,0,.18); backdrop-filter: blur(14px); cursor: pointer; }
 .command-trigger span { font-size: .7rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; }
 .command-trigger kbd, .command-menu kbd { padding: .28rem .38rem; border: 1px solid rgba(245,243,237,.22); border-radius: 3px; color: var(--muted); font: 500 .58rem Inter, sans-serif; }
@@ -922,6 +927,7 @@ legend span, .field b { color: #70706b; font-size: .68rem; font-weight: 500; tex
 }
 
 @media (max-width: 640px) {
+  .mobile-menu { width: 100%; }
   .container { width: min(calc(100% - 2rem), var(--container)); }
   .section { padding-block: clamp(3.5rem,16vw,4.5rem); }
   .site-header { height: 4.5rem; }
